@@ -32,4 +32,17 @@ public class CustomerController {
         header.add("Location","http://localhost:8081/api/v1/customer" + savedDto.getId().toString());
         return new ResponseEntity(header,HttpStatus.CREATED);
     }
+
+    @PostMapping("/{customerId}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void handleUpdate(@PathVariable UUID uuid,@RequestBody CustomerDto customerDto){
+        customerService.updateCustomer(uuid, customerDto);
+    }
+
+    @PostMapping("/{customerId}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void handleDelete(@PathVariable("customerId") UUID uuid){
+        customerService.deleteCustomer(uuid);
+    }
+
 }
